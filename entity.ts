@@ -2,8 +2,8 @@ import { IEntity, IComponent } from './types';
 
 export default function EntityManager(entities: Set<IEntity>) {
   return {
-    create(): IEntity {
-      const entity = new Map<string, IComponent>();
+    create(id: string): IEntity {
+      const entity = Object.assign(new Map<string, IComponent>(), { id });
 
       entities.add(entity);
 

@@ -2,7 +2,9 @@ export interface IComponent {
   name: string;
 }
 
-export type IEntity = Map<string, IComponent>;
+export interface IEntity extends Map<string, IComponent> {
+  id: string;
+}
 
 export interface ISystem {
   filter: Set<string>;
