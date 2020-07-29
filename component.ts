@@ -1,7 +1,7 @@
 import { IComponent, IEntity } from './types';
 
-function add(componet: IComponent, entity: IEntity) {
-  return entity.set(componet.name, componet);
+function add(component: IComponent, entity: IEntity) {
+  return entity.set(component.name, component);
 }
 
 function remove(component: IComponent, entity: IEntity) {
