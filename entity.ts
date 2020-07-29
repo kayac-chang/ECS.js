@@ -1,17 +1,13 @@
-import { Entity, Component } from './types';
+import { IEntity, IComponent } from './types';
 
-export default function EntityManager(entities: Set<Entity>) {
+export default function EntityManager(entities: Set<IEntity>) {
   return {
-    create(): Entity {
-      const entity = new Map<string, Component>();
+    create(): IEntity {
+      const entity = new Map<string, IComponent>();
 
       entities.add(entity);
 
       return entity;
-    },
-
-    get() {
-      return entities;
     },
   };
 }

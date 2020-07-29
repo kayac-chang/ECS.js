@@ -1,10 +1,10 @@
-import { Component, Entity } from './types';
+import { IComponent, IEntity } from './types';
 
-function add(componet: Component, entity: Entity) {
+function add(componet: IComponent, entity: IEntity) {
   return entity.set(componet.name, componet);
 }
 
-function remove(component: Component, entity: Entity) {
+function remove(component: IComponent, entity: IEntity) {
   return entity.delete(component.name);
 }
 

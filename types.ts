@@ -1,10 +1,10 @@
-export interface Component {
+export interface IComponent {
   name: string;
 }
 
-export type Entity = Map<string, Component>;
+export type IEntity = Map<string, IComponent>;
 
-export interface System {
+export interface ISystem {
   filter: Set<string>;
-  update: (delta: number, entities: Entity[]) => void;
+  update: (delta: number, entities: IEntity[]) => void;
 }

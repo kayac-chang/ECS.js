@@ -1,19 +1,19 @@
 import EntityManager from './entity';
 import ComponentManager from './component';
 import SystemManager from './system';
-import { Entity, System } from './types';
+import { IEntity, ISystem } from './types';
 import { memo } from './utils';
 
-const entities: Set<Entity> = new Set();
-const systems: Set<System> = new Set();
+const entities: Set<IEntity> = new Set();
+const systems: Set<ISystem> = new Set();
 
-function getEntitiesByComponentNames(entities: Entity[], filter: string[]) {
+function getEntitiesByComponentNames(entities: IEntity[], filter: string[]) {
   return entities.filter((entity) => filter.every((name) => entity.has(name)));
 }
 
 const findEntitiesBy =
   //
-  memo((entities: Set<Entity>) =>
+  memo((entities: Set<IEntity>) =>
     memo((filter: Set<string>) =>
       //
       getEntitiesByComponentNames(Array.from(entities), Array.from(filter))
