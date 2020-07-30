@@ -1,5 +1,6 @@
 import EntityManager from "./entity";
 import SystemManager from "./system";
+import ComponentManager from "./component";
 import { IEntity, ISystem } from "./types";
 import { memo } from "./utils";
 
@@ -27,6 +28,7 @@ function update(delta: number) {
 
 export default {
   entity: EntityManager(entities),
+  component: ComponentManager(),
   system: SystemManager(systems),
   update,
 };
