@@ -1,8 +1,7 @@
-import EntityManager from './entity';
-import ComponentManager from './component';
-import SystemManager from './system';
-import { IEntity, ISystem } from './types';
-import { memo } from './utils';
+import EntityManager from "./entity";
+import SystemManager from "./system";
+import { IEntity, ISystem } from "./types";
+import { memo } from "./utils";
 
 const entities: Set<IEntity> = new Set();
 const systems: Set<ISystem> = new Set();
@@ -28,9 +27,8 @@ function update(delta: number) {
 
 export default {
   entity: EntityManager(entities),
-  component: ComponentManager(),
   system: SystemManager(systems),
   update,
 };
 
-export * from './types';
+export * from "./types";
