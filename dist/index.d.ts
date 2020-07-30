@@ -6,6 +6,10 @@ declare const _default: {
         get: (id: string) => IEntity | undefined;
         remove: (id: string) => boolean | undefined;
     };
+    component: {
+        add: (component: import("./types").IComponent, entity: IEntity) => IEntity;
+        remove: (component: import("./types").IComponent, entity: IEntity) => boolean;
+    };
     system: {
         add: (system: ISystem) => number;
         get: (id: string) => ISystem | undefined;

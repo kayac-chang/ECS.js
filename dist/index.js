@@ -1,5 +1,6 @@
 import EntityManager from "./entity";
 import SystemManager from "./system";
+import ComponentManager from "./component";
 import { memo } from "./utils";
 const entities = new Set();
 const systems = new Set();
@@ -13,6 +14,7 @@ function update(delta) {
 }
 export default {
     entity: EntityManager(entities),
+    component: ComponentManager(),
     system: SystemManager(systems),
     update,
 };
