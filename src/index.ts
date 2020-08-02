@@ -19,7 +19,7 @@ function update(delta: number) {
 
   systems.forEach(({ filter, update }) => {
     const entities = filter
-      .map((component) => componentGroup[component])
+      .map((component) => componentGroup[component] || [])
       .reduce(intersection);
 
     update(delta, entities);
