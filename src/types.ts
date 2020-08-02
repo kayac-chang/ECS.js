@@ -11,7 +11,7 @@ export type ISystemID = string;
 
 export interface IComponent {
   id: IComponentID;
-  owner: IEntity;
+  owner?: IEntity;
 }
 
 export interface ISystem {

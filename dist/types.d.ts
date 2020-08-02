@@ -9,7 +9,7 @@ export declare type IComponentID = string;
 export declare type ISystemID = string;
 export interface IComponent {
     id: IComponentID;
-    owner: IEntity;
+    owner?: IEntity;
 }
 export interface ISystem {
     id: ISystemID;
