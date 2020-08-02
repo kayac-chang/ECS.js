@@ -1,14 +1,13 @@
-import { IComponent } from "./types";
 declare function update(delta: number): void;
 declare const _default: {
     entity: {
         create(entity?: string): string;
-        get(target: string): string | undefined;
         remove(target: string): string;
     };
     component: {
-        add(component: IComponent, entity: string): IComponent;
-        remove(component: IComponent, entity: string): IComponent;
+        add(component: import("./types").IComponent, entity: string): import("./types").IComponent;
+        remove(component: import("./types").IComponent, entity: string): import("./types").IComponent;
+        get(componentID: string, entity: string): import("./types").IComponent | undefined;
     };
     system: {
         add(system: import("./types").ISystem): import("./types").ISystem;

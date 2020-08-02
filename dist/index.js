@@ -7,11 +7,16 @@ const store = {
     entityCompoentsMap: {},
     systems: [],
 };
+function intersection(arr1, arr2) {
+    return arr1.filter((val) => arr2.includes(val));
+}
 function update(delta) {
     const { systems, componentGroup } = store;
     systems.forEach(({ filter, update }) => {
-        const components = filter.reduce((config, component) => Object.assign(config, { [component]: componentGroup[component] }), {});
-        update(delta, components);
+        const entities = filter
+            .map((component) => componentGroup[component])
+            .reduce(intersection);
+        update(delta, entities);
     });
 }
 export default {

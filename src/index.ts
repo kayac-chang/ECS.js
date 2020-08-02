@@ -1,7 +1,7 @@
 import EntityManager from "./entity";
 import SystemManager from "./system";
 import ComponentManager from "./component";
-import { Store, IComponentID, IComponent } from "./types";
+import { Store } from "./types";
 
 const store: Store = {
   entities: [],
@@ -10,17 +10,19 @@ const store: Store = {
   systems: [],
 };
 
+function intersection<T>(arr1: T[], arr2: T[]): T[] {
+  return arr1.filter((val) => arr2.includes(val));
+}
+
 function update(delta: number) {
   const { systems, componentGroup } = store;
 
   systems.forEach(({ filter, update }) => {
-    const components = filter.reduce(
-      (config, component) =>
-        Object.assign(config, { [component]: componentGroup[component] }),
-      {} as Record<IComponentID, IComponent[]>
-    );
+    const entities = filter
+      .map((component) => componentGroup[component])
+      .reduce(intersection);
 
-    update(delta, components);
+    update(delta, entities);
   });
 }
 

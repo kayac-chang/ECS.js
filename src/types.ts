@@ -1,7 +1,7 @@
 export interface Store {
   entities: IEntity[];
-  componentGroup: Record<IComponentID, IComponent[]>;
-  entityCompoentsMap: Record<IEntity, IComponentID[]>;
+  componentGroup: Record<IComponentID, IEntity[]>;
+  entityCompoentsMap: Record<IEntity, IComponent[]>;
   systems: ISystem[];
 }
 
@@ -17,5 +17,5 @@ export interface IComponent {
 export interface ISystem {
   id: ISystemID;
   filter: IComponentID[];
-  update: (delta: number, group: Record<IComponentID, IComponent[]>) => void;
+  update: (delta: number, entities: IEntity[]) => void;
 }

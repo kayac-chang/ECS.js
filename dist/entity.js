@@ -5,13 +5,10 @@ export default function EntityManager(store) {
             store.entities.push(entity);
             return entity;
         },
-        get(target) {
-            return store.entities.find((entity) => entity === target);
-        },
         remove(target) {
             store.entities = store.entities.filter((entity) => entity !== target);
-            store.entityCompoentsMap[target].forEach((componentID) => {
-                store.componentGroup[componentID] = store.componentGroup[componentID].filter(({ owner }) => owner !== target);
+            store.entityCompoentsMap[target].forEach(({ id }) => {
+                store.componentGroup[id] = store.componentGroup[id].filter((entity) => entity !== target);
             });
             delete store.entityCompoentsMap[target];
             return target;
