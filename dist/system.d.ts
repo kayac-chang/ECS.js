@@ -1,6 +1,6 @@
-import { ISystem } from "./types";
-export default function SystemManager(systems: Set<ISystem>): {
-    add: (system: ISystem) => number;
-    get: (id: string) => ISystem | undefined;
-    remove: (id: string) => boolean | undefined;
+import { ISystem, Store, ISystemID } from "./types";
+export default function SystemManager(store: Store): {
+    add(system: ISystem): ISystem;
+    get(target: ISystemID): ISystem | undefined;
+    remove(target: ISystemID): string;
 };

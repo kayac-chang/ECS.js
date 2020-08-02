@@ -1,20 +1,20 @@
 import { v4 as uuid } from "uuid";
-export default function EntityManager(entities) {
-    function create(id = uuid()) {
-        const entity = Object.assign(new Map(), { id });
-        entities.add(entity);
-        return entity;
-    }
-    function get(id) {
-        return Array.from(entities).find((entity) => entity.id === id);
-    }
-    function remove(id) {
-        const entity = get(id);
-        return entity && entities.delete(entity);
-    }
+export default function EntityManager(store) {
     return {
-        create,
-        get,
-        remove,
+        create(entity = uuid()) {
+            store.entities.push(entity);
+            return entity;
+        },
+        get(target) {
+            return store.entities.find((entity) => entity === target);
+        },
+        remove(target) {
+            store.entities = store.entities.filter((entity) => entity !== target);
+            store.entityCompoentsMap[target].forEach((componentID) => {
+                store.componentGroup[componentID] = store.componentGroup[componentID].filter(({ owner }) => owner !== target);
+            });
+            delete store.entityCompoentsMap[target];
+            return target;
+        },
     };
 }

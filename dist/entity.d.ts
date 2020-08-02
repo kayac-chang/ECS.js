@@ -1,6 +1,6 @@
-import { IEntity } from "./types";
-export default function EntityManager(entities: Set<IEntity>): {
-    create: (id?: string) => IEntity;
-    get: (id: string) => IEntity | undefined;
-    remove: (id: string) => boolean | undefined;
+import { IEntity, Store } from "./types";
+export default function EntityManager(store: Store): {
+    create(entity?: string): IEntity;
+    get(target: string): string | undefined;
+    remove(target: string): string;
 };
