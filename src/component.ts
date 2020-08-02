@@ -14,14 +14,14 @@ export default function ComponentManager(store: Store) {
       return component;
     },
 
-    remove(component: IComponent, entity: IEntity) {
-      groups[component.id] = groups[component.id].filter(
+    remove(componentID: IComponentID, entity: IEntity) {
+      groups[componentID] = groups[componentID].filter(
         (item) => item !== entity
       );
 
-      maps[entity] = maps[entity].filter(({ id }) => id !== component.id);
+      maps[entity] = maps[entity].filter(({ id }) => id !== componentID);
 
-      return component;
+      return componentID;
     },
 
     get(componentID: IComponentID, entity: IEntity) {

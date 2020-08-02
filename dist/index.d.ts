@@ -6,7 +6,7 @@ declare const _default: {
     };
     component: {
         add(component: import("./types").IComponent, entity: string): import("./types").IComponent;
-        remove(component: import("./types").IComponent, entity: string): import("./types").IComponent;
+        remove(componentID: string, entity: string): string;
         get(componentID: string, entity: string): import("./types").IComponent | undefined;
     };
     system: {

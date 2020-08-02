@@ -8,10 +8,10 @@ export default function ComponentManager(store) {
             maps[entity] = [...(maps[entity] || []), component];
             return component;
         },
-        remove(component, entity) {
-            groups[component.id] = groups[component.id].filter((item) => item !== entity);
-            maps[entity] = maps[entity].filter(({ id }) => id !== component.id);
-            return component;
+        remove(componentID, entity) {
+            groups[componentID] = groups[componentID].filter((item) => item !== entity);
+            maps[entity] = maps[entity].filter(({ id }) => id !== componentID);
+            return componentID;
         },
         get(componentID, entity) {
             return maps[entity].find(({ id }) => id === componentID);
