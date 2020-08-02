@@ -1,21 +1,21 @@
-import { ISystem } from "./types";
+import { ISystem, Store, ISystemID } from "./types";
 
-export default function SystemManager(systems: Set<ISystem>) {
-  function add(system: ISystem) {
-    systems.add(system);
+export default function SystemManager(store: Store) {
+  return {
+    add(system: ISystem) {
+      store.systems.push(system);
 
-    return systems.size;
-  }
+      return system;
+    },
 
-  function get(id: string) {
-    return Array.from(systems).find((item) => item.id === id);
-  }
+    get(target: ISystemID) {
+      return store.systems.find(({ id }) => id === target);
+    },
 
-  function remove(id: string) {
-    const item = get(id);
+    remove(target: ISystemID) {
+      store.systems = store.systems.filter(({ id }) => id !== target);
 
-    return item && systems.delete(item);
-  }
-
-  return { add, get, remove };
+      return target;
+    },
+  };
 }
