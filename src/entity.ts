@@ -1,28 +1,30 @@
-import { IEntity } from "./types";
+import { IEntity, Store } from "./types";
 import { v4 as uuid } from "uuid";
 
-export default function EntityManager(entities: Set<IEntity>) {
-  function create(id = uuid()): IEntity {
-    const entity: IEntity = Object.assign(new Map(), { id });
-
-    entities.add(entity);
-
-    return entity;
-  }
-
-  function get(id: string) {
-    return Array.from(entities).find((entity) => entity.id === id);
-  }
-
-  function remove(id: string) {
-    const entity = get(id);
-
-    return entity && entities.delete(entity);
-  }
-
+export default function EntityManager(store: Store) {
   return {
-    create,
-    get,
-    remove,
+    create(entity = uuid()): IEntity {
+      store.entities.push(entity);
+
+      return entity;
+    },
+
+    get(target: string) {
+      return store.entities.find((entity) => entity === target);
+    },
+
+    remove(target: string) {
+      store.entities = store.entities.filter((entity) => entity !== target);
+
+      store.entityCompoentsMap[target].forEach((componentID) => {
+        store.componentGroup[componentID] = store.componentGroup[
+          componentID
+        ].filter(({ owner }) => owner !== target);
+      });
+
+      delete store.entityCompoentsMap[target];
+
+      return target;
+    },
   };
 }

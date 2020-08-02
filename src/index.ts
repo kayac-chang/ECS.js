@@ -1,35 +1,33 @@
 import EntityManager from "./entity";
 import SystemManager from "./system";
 import ComponentManager from "./component";
-import { IEntity, ISystem } from "./types";
-import { memo } from "./utils";
+import { Store, IComponentID, IComponent } from "./types";
 
-const entities: Set<IEntity> = new Set();
-const systems: Set<ISystem> = new Set();
-
-function getEntitiesByComponentNames(entities: IEntity[], filter: string[]) {
-  return entities.filter((entity) => filter.every((name) => entity.has(name)));
-}
-
-const findEntitiesBy =
-  //
-  memo((entities: Set<IEntity>) =>
-    memo((filter: Set<string>) =>
-      //
-      getEntitiesByComponentNames(Array.from(entities), Array.from(filter))
-    )
-  );
+const store: Store = {
+  entities: [],
+  componentGroup: {},
+  entityCompoentsMap: {},
+  systems: [],
+};
 
 function update(delta: number) {
-  const find = findEntitiesBy(entities);
+  const { systems, componentGroup } = store;
 
-  systems.forEach(({ filter, update }) => update(delta, find(filter)));
+  systems.forEach(({ filter, update }) => {
+    const components = filter.reduce(
+      (config, component) =>
+        Object.assign(config, { [component]: componentGroup[component] }),
+      {} as Record<IComponentID, IComponent[]>
+    );
+
+    update(delta, components);
+  });
 }
 
 export default {
-  entity: EntityManager(entities),
-  component: ComponentManager(),
-  system: SystemManager(systems),
+  entity: EntityManager(store),
+  component: ComponentManager(store),
+  system: SystemManager(store),
   update,
 };
 

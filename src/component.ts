@@ -1,16 +1,27 @@
-import { IComponent, IEntity } from "./types";
+import { IComponent, IEntity, Store } from "./types";
 
-function add(component: IComponent, entity: IEntity) {
-  return entity.set(component.id, component);
-}
+export default function ComponentManager(store: Store) {
+  const groups = store.componentGroup;
+  const maps = store.entityCompoentsMap;
 
-function remove(component: IComponent, entity: IEntity) {
-  return entity.delete(component.id);
-}
-
-export default function ComponentManager() {
   return {
-    add,
-    remove,
+    add(component: IComponent, entity: IEntity) {
+      component.owner = entity;
+      groups[component.id] = [...(groups[component.id] || []), component];
+
+      maps[entity] = [...(maps[entity] || []), component.id];
+
+      return component;
+    },
+
+    remove(component: IComponent, entity: IEntity) {
+      groups[component.id] = groups[component.id].filter(
+        ({ owner }) => owner !== entity
+      );
+
+      maps[entity] = maps[entity].filter((id) => id !== component.id);
+
+      return component;
+    },
   };
 }

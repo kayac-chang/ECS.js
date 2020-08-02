@@ -1,12 +1,21 @@
-interface HasID {
-  id: string;
+export interface Store {
+  entities: IEntity[];
+  componentGroup: Record<IComponentID, IComponent[]>;
+  entityCompoentsMap: Record<IEntity, IComponentID[]>;
+  systems: ISystem[];
 }
 
-export interface IComponent extends HasID {}
+export type IEntity = string;
+export type IComponentID = string;
+export type ISystemID = string;
 
-export interface IEntity extends Map<string, IComponent>, HasID {}
+export interface IComponent {
+  id: IComponentID;
+  owner: IEntity;
+}
 
-export interface ISystem extends HasID {
-  filter: Set<string>;
-  update: (delta: number, entities: IEntity[]) => void;
+export interface ISystem {
+  id: ISystemID;
+  filter: IComponentID[];
+  update: (delta: number, group: Record<IComponentID, IComponent[]>) => void;
 }
