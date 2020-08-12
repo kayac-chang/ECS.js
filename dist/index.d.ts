@@ -3,6 +3,7 @@ declare const _default: {
     entity: {
         create(entity?: string): string;
         query(component: string): string[];
+        has(entity: string): string | undefined;
         remove(target: string): string;
     };
     component: {

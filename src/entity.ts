@@ -13,7 +13,11 @@ export default function EntityManager(store: Store) {
       return store.componentGroup[component];
     },
 
-    remove(target: string) {
+    has(entity: IEntity) {
+      return store.entities.find((_entity) => entity === _entity);
+    },
+
+    remove(target: IEntity) {
       store.entities = store.entities.filter((entity) => entity !== target);
 
       store.entityCompoentsMap[target].forEach(({ id }) => {

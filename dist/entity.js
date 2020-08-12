@@ -8,6 +8,9 @@ export default function EntityManager(store) {
         query(component) {
             return store.componentGroup[component];
         },
+        has(entity) {
+            return store.entities.find((_entity) => entity === _entity);
+        },
         remove(target) {
             store.entities = store.entities.filter((entity) => entity !== target);
             store.entityCompoentsMap[target].forEach(({ id }) => {
