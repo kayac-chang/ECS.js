@@ -1,4 +1,4 @@
-import { IEntity, Store } from "./types";
+import { IEntity, Store, IComponentID } from "./types";
 import { v4 as uuid } from "uuid";
 
 export default function EntityManager(store: Store) {
@@ -7,6 +7,10 @@ export default function EntityManager(store: Store) {
       store.entities.push(entity);
 
       return entity;
+    },
+
+    query(component: IComponentID): IEntity[] {
+      return store.componentGroup[component];
     },
 
     remove(target: string) {
