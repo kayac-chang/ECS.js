@@ -1,6 +1,6 @@
 {
   "name": "@kayac/ecs.js",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "entity component system with js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
