@@ -2,6 +2,7 @@ declare function update(delta: number): void;
 declare const _default: {
     entity: {
         create(entity?: string): string;
+        query(component: string): string[];
         remove(target: string): string;
     };
     component: {

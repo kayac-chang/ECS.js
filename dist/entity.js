@@ -5,6 +5,9 @@ export default function EntityManager(store) {
             store.entities.push(entity);
             return entity;
         },
+        query(component) {
+            return store.componentGroup[component];
+        },
         remove(target) {
             store.entities = store.entities.filter((entity) => entity !== target);
             store.entityCompoentsMap[target].forEach(({ id }) => {
