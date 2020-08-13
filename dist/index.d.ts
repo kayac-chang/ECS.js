@@ -7,6 +7,7 @@ declare const _default: {
         remove(target: string): string;
     };
     component: {
+        has(componentID: string, entity: string): boolean;
         add(component: import("./types").IComponent, entity: string): import("./types").IComponent;
         remove(componentID: string, entity: string): string;
         get(componentID: string, entity: string): import("./types").IComponent | undefined;

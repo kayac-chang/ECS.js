@@ -2,7 +2,13 @@ export default function ComponentManager(store) {
     const groups = store.componentGroup;
     const maps = store.entityCompoentsMap;
     return {
+        has(componentID, entity) {
+            return maps[entity].some(({ id }) => id === componentID);
+        },
         add(component, entity) {
+            if (this.has(component.id, entity)) {
+                throw new Error(`duplicate component found in this entity.`);
+            }
             component.owner = entity;
             groups[component.id] = [...(groups[component.id] || []), entity];
             maps[entity] = [...(maps[entity] || []), component];
