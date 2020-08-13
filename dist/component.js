@@ -3,7 +3,8 @@ export default function ComponentManager(store) {
     const maps = store.entityCompoentsMap;
     return {
         has(componentID, entity) {
-            return maps[entity].some(({ id }) => id === componentID);
+            var _a;
+            return (_a = maps[entity]) === null || _a === void 0 ? void 0 : _a.some(({ id }) => id === componentID);
         },
         add(component, entity) {
             if (this.has(component.id, entity)) {

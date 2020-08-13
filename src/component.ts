@@ -6,7 +6,7 @@ export default function ComponentManager(store: Store) {
 
   return {
     has(componentID: IComponentID, entity: IEntity) {
-      return maps[entity].some(({ id }) => id === componentID);
+      return maps[entity]?.some(({ id }) => id === componentID);
     },
 
     add(component: IComponent, entity: IEntity) {
